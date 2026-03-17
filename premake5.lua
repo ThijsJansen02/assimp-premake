@@ -1,0 +1,142 @@
+project "Assimp"
+	kind "StaticLib"
+	language "C++"
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}/int")
+	staticruntime "off"
+
+	files
+	{
+		-- Dependencies
+		'assimp/contrib/unzip/**',
+		'assimp/contrib/irrXML/**',
+		'assimp/contrib/zlib/**',
+		-- Common
+		
+        'code/**.cpp',
+        'code/**.hpp',
+        'code/**.c',
+        'code/**.h'
+
+
+	}
+
+	includedirs
+	{
+		"%{IncludeDir.assimp}",
+        "%{prj.location}/code",
+        "%{prj.location}/contrib/zlib",
+        "%{prj.location}/contrib/zlib/contrib/minizip",
+        "%{prj.location}/",
+        "%{prj.location}/contrib/unzip",
+        "%{prj.location}/contrib/irrXML",
+        "%{prj.location}/contrib/utf8cpp/source",
+        "%{prj.location}/contrib/rapidjson/include",
+        "%{prj.location}/contrib/pugixml/src"
+	}
+
+	
+	libdirs
+	{
+        
+	}
+
+
+	links 
+	{
+        
+	}
+
+
+	defines 
+	{
+        'ASSIMP_BUILD_NO_EXPORT',
+		'ASSIMP_BUILD_NO_3D_IMPORTER',
+		'ASSIMP_BUILD_NO_3DS_IMPORTER',
+		'ASSIMP_BUILD_NO_3MF_IMPORTER',
+		'ASSIMP_BUILD_NO_AC_IMPORTER',
+		'ASSIMP_BUILD_NO_AMF_IMPORTER',
+		'ASSIMP_BUILD_NO_ASE_IMPORTER',
+		-- 'ASSIMP_BUILD_NO_ASSBIN_IMPORTER'
+		'ASSIMP_BUILD_NO_B3D_IMPORTER',
+		--'ASSIMP_BUILD_NO_BLEND_IMPORTER',
+		'ASSIMP_BUILD_NO_BVH_IMPORTER',
+		'ASSIMP_BUILD_NO_C4D_IMPORTER',
+		'ASSIMP_BUILD_NO_COB_IMPORTER',
+		-- 'ASSIMP_BUILD_NO_COLLADA_IMPORTER',
+		'ASSIMP_BUILD_NO_CSM_IMPORTER',
+		'ASSIMP_BUILD_NO_DXF_IMPORTER',
+		-- 'ASSIMP_BUILD_NO_FBX_IMPORTER',
+		'ASSIMP_BUILD_NO_GLTF_IMPORTER',
+		'ASSIMP_BUILD_NO_HMP_IMPORTER',
+		'ASSIMP_BUILD_NO_IFC_IMPORTER',
+		'ASSIMP_BUILD_NO_IRR_IMPORTER',
+		'ASSIMP_BUILD_NO_IRRMESH_IMPORTER',
+		'ASSIMP_BUILD_NO_LWO_IMPORTER',
+		'ASSIMP_BUILD_NO_LWS_IMPORTER',
+		'ASSIMP_BUILD_NO_M3D_IMPORTER',
+		'ASSIMP_BUILD_NO_MD2_IMPORTER',
+		'ASSIMP_BUILD_NO_MD3_IMPORTER',
+		'ASSIMP_BUILD_NO_MD5_IMPORTER',
+		'ASSIMP_BUILD_NO_MDC_IMPORTER',
+		'ASSIMP_BUILD_NO_MDL_IMPORTER',
+		'ASSIMP_BUILD_NO_MMD_IMPORTER',
+		'ASSIMP_BUILD_NO_MS3D_IMPORTER',
+		'ASSIMP_BUILD_NO_NDO_IMPORTER',
+		'ASSIMP_BUILD_NO_NFF_IMPORTER',
+		-- 'ASSIMP_BUILD_NO_OBJ_IMPORTER',
+		'ASSIMP_BUILD_NO_OFF_IMPORTER',
+		'ASSIMP_BUILD_NO_OGRE_IMPORTER',
+		'ASSIMP_BUILD_NO_OPENGEX_IMPORTER',
+		'ASSIMP_BUILD_NO_PLY_IMPORTER',
+		'ASSIMP_BUILD_NO_Q3BSP_IMPORTER',
+		'ASSIMP_BUILD_NO_Q3D_IMPORTER',
+		'ASSIMP_BUILD_NO_RAW_IMPORTER',
+		'ASSIMP_BUILD_NO_SIB_IMPORTER',
+		'ASSIMP_BUILD_NO_SMD_IMPORTER',
+		'ASSIMP_BUILD_NO_STEP_IMPORTER',
+		'ASSIMP_BUILD_NO_STL_IMPORTER',
+		'ASSIMP_BUILD_NO_TERRAGEN_IMPORTER',
+        'ASSIMP_BUILD_NO_USD_IMPORTER',
+		'ASSIMP_BUILD_NO_X_IMPORTER',
+		'ASSIMP_BUILD_NO_X3D_IMPORTER',
+		'ASSIMP_BUILD_NO_XGL_IMPORTER'
+	}
+
+	filter "system:windows"
+		cppdialect "C++17"
+		systemversion "latest"
+
+		defines
+		{
+			"PH_PLATFORM_WINDOWS"
+		}
+
+	filter "configurations:Debug"
+		defines "PH_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+		links {
+
+		}
+
+	filter "configurations:Release"
+		defines "PH_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+		links {
+            
+		}
+
+	filter "configurations:Dist"
+		defines "PH_DIST"
+		runtime "Release"
+		optimize "on"
+
+		links {
+			
+		}
+
+    
