@@ -8,9 +8,11 @@ project "Assimp"
 	files
 	{
 		-- Dependencies
-		'assimp/contrib/unzip/**',
-		'assimp/contrib/irrXML/**',
-		'assimp/contrib/zlib/**',
+		'contrib/unzip/**',
+		'contrib/irrXML/**',
+		'contrib/zlib/**',
+        --"contrib/pugixml/src/**.c",
+        --"contrib/pugixml/src/**.cpp",
 		-- Common
 		
         'code/**.cpp',
